@@ -1,0 +1,50 @@
+﻿@page "gravarTexto"
+@model AT_FallsTurism.Pages.Notacoes.ViewNotesModel
+@{
+	ViewData["Title"] = "Gravar arquivo";
+}
+
+<h1 class="fs-1">Gravar arquivo</h1>
+
+<div class="container mt-5">
+    
+
+    <form method="post">
+        <div class="mb-3">
+            <label asp-for="Input.Conteudo" class="form-label"></label>
+            <textarea asp-for="Input.Conteudo" class="form-control" rows="5"></textarea>
+            <span asp-validation-for="Input.Conteudo" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+
+    @if (!string.IsNullOrEmpty(Model.Caminho)) {
+        <div class="alert alert-success mt-4" role="alert">
+            Arquivo salvo: <a href="@Model.Caminho" download class="alert-link">Download</a>
+        </div>
+    }
+
+    <hr class="my-5">
+
+    <h1 class="mb-4">Ler arquivos salvos</h1>
+
+    @if (!Model.Arquivos.Any()) {
+        <p class="lead">Nenhum arquivo encontrado.</p>
+    } else {
+        <div class="list-group">
+            @foreach (var arquivo in Model.Arquivos) {
+                <a asp-page="/Notacoes/ViewNotes" asp-route-nomeDoArquivoParaVer="@arquivo" class="list-group-item list-group-item-action">
+                    @arquivo
+                </a>
+            }
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(Model.ConteudoDoArquivoLido)) {
+        <hr class="my-5">
+        <h3 class="mb-3">Conteúdo do Arquivo Selecionado:</h3>
+        <div class="card card-body bg-light">
+            <pre class="mb-0"><code>@Html.Encode(Model.ConteudoDoArquivoLido)</code></pre>
+        </div>
+    }
+</div>

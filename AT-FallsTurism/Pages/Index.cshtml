@@ -1,0 +1,116 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Pacotes Turísticos FallsTurism";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+<div class="container my-5">
+
+    <h1 class="display-4 text-center mb-5 fw-bold text-primary animate__animated animate__fadeInDown">
+        Nossos Pacotes Turísticos Imperdíveis
+    </h1>
+
+    @if (TempData["SuccessMessage"] != null) {
+        <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+            <strong class="fw-bold">Sucesso!</strong>
+            <span class="ms-2">@TempData["SuccessMessage"]</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="d-flex justify-content-center flex-wrap gap-3 mb-5">
+        <a asp-page="/Reservas/CreateReservation" class="btn btn-success btn-lg rounded-pill shadow-sm">
+            Fazer Nova Reserva
+        </a>
+        <a asp-page="/Clientes/CreateCliente" class="btn btn-success btn-lg rounded-pill shadow-sm">
+            Fazer Cadastro
+        </a>
+        <a asp-page="/Reservas/ListaReservas" class="btn btn-success btn-lg rounded-pill shadow-sm">
+            Lista de Reservas
+        </a>
+        <a asp-page="/Clientes/List" class="btn btn-success btn-lg rounded-pill shadow-sm">
+            Lista de Clientes
+        </a>
+    </div>
+
+    @if (Model.PacotesTuristicos == null || !Model.PacotesTuristicos.Any()) {
+        <div class="alert alert-warning text-center shadow-sm" role="alert">
+            <h4 class="alert-heading">Ops! Nenhum pacote turístico disponível no momento.</h4>
+            <p>Estamos a preparar novas aventuras! Volte em breve para descobrir.</p>
+        </div>
+    } else {
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            @foreach (var pacote in Model.PacotesTuristicos) {
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0 transform-on-hover">
+                        <div class="card-body d-flex flex-column">
+                            <h2 class="card-title text-primary fw-bold mb-3 border-bottom pb-2">
+                                @pacote.Titulo
+                            </h2>
+                            <div class="mb-3">
+                                <p class="card-text mb-1">
+                                    <span class="fw-semibold"><i class="bi bi-calendar-event me-2 text-info"></i>Início:</span> @pacote.DataInicio.ToString("dd/MM/yyyy")
+                                </p>
+                                <p class="card-text mb-1">
+                                    <span class="fw-semibold"><i class="bi bi-people-fill me-2 text-info"></i>Capacidade Máxima:</span> @pacote.CapacidadeMaxima participantes
+                                </p>
+                            </div>
+                            <p class="card-text text-success fs-2 fw-bold mb-4">
+                                @pacote.Preco.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR")) <span class="fs-5 text-success fw-normal">por pessoa</span>
+                            </p>
+
+                            @if (pacote.Destinos != null && pacote.Destinos.Any()) {
+                                <h3 class="card-subtitle text-muted fw-semibold mt-auto mb-2 border-top pt-3">Destinos Incluídos:</h3>
+                                <ul class="list-unstyled mb-0">
+                                    @foreach (var destino in pacote.Destinos) {
+                                        <li><i class="bi bi-geo-alt-fill me-2 text-secondary"></i><span class="fw-medium text-dark">@destino.Nome</span>, @destino.Pais</li>
+                                    }
+                                </ul>
+                            } else {
+                                <p class="text-muted fst-italic mt-auto">Nenhum destino especificado para este pacote.</p>
+                            }
+                        </div>
+                        <div class="card-footer bg-light border-0 pt-0">
+                            <a asp-page="/PacotesTuristicos/PacoteDetails" asp-route-id="@pacote.Id" class="btn btn-outline-primary w-100 mt-3 shadow-sm">
+                                Ver Detalhes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+    .transform-on-hover {
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    .transform-on-hover:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+    .animate__animated {
+        animation-duration: 1s;
+        animation-fill-mode: both;
+    }
+    .animate__fadeInDown {
+        animation-name: fadeInDown;
+    }
+    @@keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translate3d(0, -20px, 0);
+        }
+        to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>

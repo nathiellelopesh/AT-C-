@@ -1,0 +1,39 @@
+﻿@page "/capacidadeTeste"
+@model AT_FallsTurism.Pages.Reservas.CapacityTestModel
+@{
+    ViewData["Title"] = "Teste de Evento de Capacidade";
+}
+
+<h1 class="fs-1">@ViewData["Title"]</h1>
+
+<p>Este teste demonstra o evento CapacityReached na classe PacoteTuristico.</p>
+<p>As mensagens de alerta do evento serão exibidas no console do servidor onde a aplicação está rodando.</p>
+
+<div class="alert alert-info" role="alert">
+    @Model.StatusMessage
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post" asp-page-handler="AddReservation">
+            <button type="submit" class="btn btn-primary">Adicionar Reserva</button>
+            <small class="form-text text-muted ms-2">Clique para adicionar uma reserva ao pacote de teste.</small>
+        </form>
+        <form method="post" asp-page-handler="ClearReservations" class="mt-3">
+            <button type="submit" class="btn btn-warning">Limpar Reservas do Pacote</button>
+            <small class="form-text text-muted ms-2">Zera as reservas do pacote.</small>
+        </form>
+    </div>
+</div>
+
+<hr />
+
+<div>
+    <a asp-page="/Index" class="mt-3 d-inline-block">Voltar para a Página Inicial</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
