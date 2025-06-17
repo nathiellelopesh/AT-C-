@@ -14,6 +14,8 @@ namespace AT_FallsTurism.Data.Configuration {
             builder.Property(c => c.Email).HasColumnName("email_cliente").HasMaxLength(100).IsRequired();
             builder.HasIndex(c => c.Email).IsUnique();
 
+            builder.Property(c => c.DeletedAt).HasColumnName("deleted_at");
+
             builder.HasData(
                 new Cliente { Id = 1, Nome = "Maria Silva", Email = "maria@email.com" },
                 new Cliente { Id = 2, Nome = "Leandro Santos", Email = "leandro@email.com" }

@@ -1,5 +1,5 @@
 ﻿@page
-@model IndexModel
+@model AT_FallsTurism.Pages.Login.ListPacoteTuristicoModel
 @{
     ViewData["Title"] = "Pacotes Turísticos FallsTurism";
 }
@@ -27,7 +27,12 @@
         <a asp-page="/Clientes/CreateCliente" class="btn btn-success btn-lg rounded-pill shadow-sm">
             Fazer Cadastro
         </a>
-        
+        <a asp-page="/Reservas/ListaReservas" class="btn btn-success btn-lg rounded-pill shadow-sm">
+            Lista de Reservas
+        </a>
+        <a asp-page="/Clientes/List" class="btn btn-success btn-lg rounded-pill shadow-sm">
+            Lista de Clientes
+        </a>
     </div>
 
     @if (Model.PacotesTuristicos == null || !Model.PacotesTuristicos.Any()) {
@@ -87,22 +92,27 @@
     .transform-on-hover {
         transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     }
-    .transform-on-hover:hover {
-        transform: translateY(-5px) scale(1.02);
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
-    }
+
+        .transform-on-hover:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        }
+
     .animate__animated {
         animation-duration: 1s;
         animation-fill-mode: both;
     }
+
     .animate__fadeInDown {
         animation-name: fadeInDown;
     }
+
     @@keyframes fadeInDown {
         from {
             opacity: 0;
             transform: translate3d(0, -20px, 0);
         }
+
         to {
             opacity: 1;
             transform: translate3d(0, 0, 0);

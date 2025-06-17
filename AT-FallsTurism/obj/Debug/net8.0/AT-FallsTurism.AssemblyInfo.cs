@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AT-FallsTurism")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+af9b61c015caef61afd91d9d618d0110a5d039e8")]
 [assembly: System.Reflection.AssemblyProductAttribute("AT-FallsTurism")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AT-FallsTurism")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

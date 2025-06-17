@@ -23,7 +23,11 @@ namespace AT_FallsTurism.Pages.Clientes
 
         public async Task OnGetAsync()
         {
-            Cliente = await _context.Clientes.ToListAsync();
+            //Cliente = await _context.Clientes.ToListAsync();
+
+            Cliente = await _context.Clientes
+                                    .Where(c => c.DeletedAt == null)
+                                    .ToListAsync();
         }
     }
 }

@@ -4,6 +4,7 @@ using AT_FallsTurism.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AT_FallsTurism.Migrations
 {
     [DbContext(typeof(FallsTurismContext))]
-    partial class FallsTurismContextModelSnapshot : ModelSnapshot
+    [Migration("20250617012007_AddIsDeletedColumn")]
+    partial class AddIsDeletedColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
